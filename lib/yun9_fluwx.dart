@@ -2,7 +2,7 @@
 /// easy to use.
 ///
 ///  A open source project authorized by [OpenFlutter](https://github.com/OpenFlutter).
-library fluwx;
+library yun9_fluwx;
 
 export 'src/fluwx_iml.dart';
 export 'src/models/wechat_auth_by_qr_code.dart';
