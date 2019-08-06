@@ -3,7 +3,7 @@
 ### Pay
  
 ```dart
-import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;
 fluwx.pay(WeChatPayModel(
                   appId: 'wxd930ea5d5a258f4f', 
                   partnerId: '1900000109',
@@ -27,4 +27,3 @@ The return value of `fluwx.share(model)` is a `Map`：
      }
 ```
 For the response from WeChat,read [RESPONSE](./RESPONSE.md) please.
-  

@@ -59,7 +59,7 @@ dependencies:
 Before using`Fluwx`,you should init `FLuwx`：
 
  ```dart
-    import 'package:fluwx/fluwx.dart' as fluwx;
+    import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;
     fluwx.register(appId:"wxd930ea5d5a258f4f");
  ```
 

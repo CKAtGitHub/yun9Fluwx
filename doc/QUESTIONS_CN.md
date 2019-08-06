@@ -140,7 +140,7 @@ _wxlogin = fluwx.responseFromAuth.listen((val) {})
 请在在pod file里将iOS项目deployment target改到9.0。
 
 ### ResponseType与Dio插件中的命名冲突
-使用as的方式导包即可：```import 'package:fluwx/fluwx.dart' as fluwx;```
+使用as的方式导包即可：```import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;```
 
 ### ShareSDK(分享插件)和Fluwx(微信支付插件)存在冲突
 1、将S hareSDK 的```/ios/sharesdk.podspec```里的 ```s.dependency 'mob_sharesdk/ShareSDKPlatforms/WeChat' ```改为  ``` s.dependency 'mob_sharesdk/ShareSDKPlatforms/WeChatFull'```  

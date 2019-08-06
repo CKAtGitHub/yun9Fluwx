@@ -56,7 +56,7 @@ dependencies:
 ## 初始化
 使用`Fluwx`前，需要进行初始化操作：
  ```dart
-     import 'package:fluwx/fluwx.dart' as fluwx;
+     import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;
      fluwx.register(appId:"wxd930ea5d5a258f4f");
  ```
 

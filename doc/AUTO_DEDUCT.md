@@ -1,7 +1,7 @@
 ## SIGN AUTO-DEDUCT
 see [details](https://pay.weixin.qq.com/wiki/doc/api/pap.php?chapter=18_5&index=2).
 ```dart
-   import 'package:fluwx/fluwx.dart' as fluwx;
+   import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;
    fluwx.autoDeDuct(
            appId: "",
            mchId: "",

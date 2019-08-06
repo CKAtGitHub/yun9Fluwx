@@ -4,7 +4,7 @@
 ### 拉起支付
  
 ```dart
-import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:yun9_fluwx/yun9_fluwx.dart' as fluwx;
 fluwx.pay(WeChatPayModel(
                   appId: 'wxd930ea5d5a258f4f', 
                   partnerId: '1900000109',
@@ -27,4 +27,3 @@ fluwx.pay(WeChatPayModel(
        result:true //或者false，取决于WXApi.sendRequest()的结果
      }
 ```
-  
