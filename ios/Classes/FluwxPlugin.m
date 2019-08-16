@@ -1,4 +1,4 @@
-#import <fluwx/FluwxPlugin.h>
+#import <yun9_fluwx/FluwxPlugin.h>
 
 
 #import "FluwxAuthHandler.h"
@@ -11,6 +11,7 @@
 #import "FluwxLaunchMiniProgramHandler.h"
 #import "FluwxSubscribeMsgHandler.h"
 #import "FluwxAutoDeductHandler.h"
+#import "FluwxSelectInvoiceHandler.h"
 
 @implementation FluwxPlugin
 
@@ -25,6 +26,7 @@ FluwxPaymentHandler *_fluwxPaymentHandler;
 FluwxLaunchMiniProgramHandler *_fluwxLaunchMiniProgramHandler;
 FluwxSubscribeMsgHandler *_fluwxSubscribeMsgHandler;
 FluwxAutoDeductHandler *_fluwxAutoDeductHandler;
+FluwxSelectInvoiceHandler *_fluwxSelectInvoiceHandler;
 
 - (void)dealloc {
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -56,6 +58,7 @@ FluwxAutoDeductHandler *_fluwxAutoDeductHandler;
         _fluwxLaunchMiniProgramHandler = [[FluwxLaunchMiniProgramHandler alloc] initWithRegistrar:registrar];
         _fluwxSubscribeMsgHandler = [[FluwxSubscribeMsgHandler alloc] initWithRegistrar:registrar];
         _fluwxAutoDeductHandler = [[FluwxAutoDeductHandler alloc] initWithRegistrar:registrar];
+        _fluwxSelectInvoiceHandler = [[FluwxSelectInvoiceHandler alloc] initWithRegistrar:registrar];
     }
 
     return self;
@@ -63,7 +66,6 @@ FluwxAutoDeductHandler *_fluwxAutoDeductHandler;
 
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-
 
     if ([registerApp isEqualToString:call.method]) {
         [_fluwxWXApiHandler registerApp:call result:result];
@@ -85,6 +87,11 @@ FluwxAutoDeductHandler *_fluwxAutoDeductHandler;
         [_fluwxPaymentHandler handlePayment:call result:result];
         return;
     }
+
+    if ([@"selectInvoice" isEqualToString:call.method]) {
+        [_fluwxSelectInvoiceHandler handleSelectInvoice:call result:result];
+        return;
+        }
 
     if ([@"launchMiniProgram" isEqualToString:call.method]) {
         [_fluwxLaunchMiniProgramHandler handleLaunchMiniProgram:call result:result];

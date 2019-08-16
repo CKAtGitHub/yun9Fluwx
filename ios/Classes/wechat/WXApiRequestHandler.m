@@ -6,6 +6,7 @@
 //
 //
 
+#import <objc/runtime.h>
 #import <Foundation/Foundation.h>
 #import "WXApi.h"
 #import "WXApiRequestHandler.h"
@@ -382,9 +383,9 @@
     chooseInvoiceReq.cardSign = cardSign;
     chooseInvoiceReq.nonceStr = nonceStr;
     chooseInvoiceReq.signType = signType;
-//    chooseCardReq.cardType = @"INVOICE";
     chooseInvoiceReq.timeStamp = timestamp;
-//    chooseCardReq.canMultiSelect = 1;
+    // chooseInvoiceReq.canMultiSelect = 1;
+    // chooseInvoiceReq.cardType = @"INVOICE";
     return [WXApi sendReq:chooseInvoiceReq];
 }
 
@@ -406,5 +407,4 @@
 
     return [WXApi sendReq:req];
 }
-
 @end

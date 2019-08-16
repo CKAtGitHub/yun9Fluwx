@@ -42,6 +42,9 @@ Stream<WeChatAuthResponse> get responseFromAuth =>
 StreamController<WeChatPaymentResponse> _responsePaymentController =
     new StreamController.broadcast();
 
+StreamController<WeChatSelectInvoiceResponse> _responseSelectInvoiceController =
+    new StreamController.broadcast();
+
 ///Response from payment
 Stream<WeChatPaymentResponse> get responseFromPayment =>
     _responsePaymentController.stream;
@@ -113,6 +116,9 @@ Future<dynamic> _handler(MethodCall methodCall) {
   } else if ("onAutoDeductResponse" == methodCall.method) {
     _responseAutoDeductController
         .add(WeChatAutoDeductResponse.fromMap(methodCall.arguments));
+  } else if ("onSelectInvoiceResponse" == methodCall.method) {
+    _responseSelectInvoiceController
+        .add(WeChatSelectInvoiceResponse.fromMap(methodCall.arguments));
   }
 
   return Future.value(true);
@@ -143,6 +149,7 @@ void dispose({
   onAuthByQRCodeFinished: true,
   onAuthGotQRCode: true,
   onQRCodeScanned: true,
+  onSelectInvoiceResponse: true,
 }) {
   if (shareResponse) {
     _responseShareController.close();
@@ -169,6 +176,10 @@ void dispose({
 
   if (onQRCodeScanned) {
     _onQRCodeScannedController.close();
+  }
+
+  if (onSelectInvoiceResponse) {
+    _responseSelectInvoiceController.close();
   }
 }
 
@@ -338,6 +349,27 @@ Future autoDeDuct(
     'timestamp': timestamp,
     'return_app': returnApp,
     "businessType": businessType
+  });
+}
+
+Future selectInvoice(
+    {@required String appId,
+    @required String cardSign,
+    String signType = "SHA256",
+    String locationId,
+    String cardId,
+    String cardType = "INVOICE",
+    String canMultiSelect = "1"}) async {
+  return await _channel.invokeMethod("selectInvoice", {
+    'appid': appId,
+    'locationId': locationId,
+    'signType': signType,
+    'cardSign': cardSign,
+    'timeStamp': (DateTime.now().millisecondsSinceEpoch / 1000).toString(),
+    'nonceStr': DateTime.now().millisecondsSinceEpoch.toString(),
+    'cardId': cardId,
+    'cardType': cardType,
+    'canMultiSelect': canMultiSelect
   });
 }
 

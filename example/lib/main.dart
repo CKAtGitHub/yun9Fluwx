@@ -152,6 +152,18 @@ class ShareSelectorPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: new OutlineButton(
                 onPressed: () {
+                  fluwx.selectInvoice(
+                      appId: "wxd930ea5d5a258f4f", cardSign: "cardSign")
+                  .then((data) {
+                    print(data);
+                  });
+                },
+                child: const Text("Launch Invoice")),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new OutlineButton(
+                onPressed: () {
                   Navigator.of(context).pushNamed("subscribeMessage");
                 },
                 child: const Text("SubscribeMessage")),

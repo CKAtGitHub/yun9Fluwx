@@ -42,6 +42,7 @@ class FluwxPlugin(private val registrar: Registrar, channel: MethodChannel) : Me
     private val fluwxLaunchMiniProgramHandler = FluwxLaunchMiniProgramHandler()
     private val fluwxSubscribeMsgHandler = FluwxSubscribeMsgHandler()
     private val fluwxAutodeducthandler = FluwxAutoDeductHandler()
+    private val fluwxSelectInvoiceHandler = FluwxSelectInvoiceHandler();
 
     init {
         fluwxShareHandler.setRegistrar(registrar)
@@ -82,6 +83,11 @@ class FluwxPlugin(private val registrar: Registrar, channel: MethodChannel) : Me
 
         if ("stopAuthByQRCode" == call.method) {
             fluwxAuthHandler.stopAuthByQRCode(result)
+            return
+        }
+
+        if (call.method == WeChatPluginMethods.SELECT_INVOICE) {
+            fluwxSelectInvoiceHandler.selectInvoice(call,result)
             return
         }
 

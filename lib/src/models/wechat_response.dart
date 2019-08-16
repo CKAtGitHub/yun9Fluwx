@@ -151,3 +151,22 @@ class WeChatAutoDeductResponse {
         businessType = map["businessType"],
         resultInfo = map["resultInfo"];
 }
+
+class WeChatSelectInvoiceResponse {
+  final String errStr;
+  final int type;
+  final int errCode;
+  final String androidOpenId;
+  final String iOSDescription;
+  final String cardItemList;
+  final String androidTransaction;
+
+  WeChatSelectInvoiceResponse.fromMap(Map map)
+      : errStr = map["errStr"],
+        type = map["type"],
+        errCode = map["errCode"],
+        androidOpenId = map["openId"],
+        iOSDescription = map["description"],
+        cardItemList = map["cardItemList"],
+        androidTransaction = map["transaction"];
+}

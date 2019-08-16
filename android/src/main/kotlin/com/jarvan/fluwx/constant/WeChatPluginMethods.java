@@ -28,4 +28,9 @@ public class WeChatPluginMethods {
     public static final String SUBSCRIBE_MSG = "subscribeMsg";
 
     public static final String AUTO_DEDUCT = "autoDeduct";
+
+    public static final String SELECT_INVOICE = "selectInvoice";
+
+
+    public static final String ON_SELECT_INVOICE_RESPONSE = "onSelectInvoiceResponse";
 }

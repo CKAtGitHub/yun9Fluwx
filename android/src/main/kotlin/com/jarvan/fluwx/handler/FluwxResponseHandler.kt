@@ -18,6 +18,7 @@ package com.jarvan.fluwx.handler
 import com.jarvan.fluwx.constant.WeChatPluginMethods
 import com.jarvan.fluwx.constant.WechatPluginKeys
 import com.tencent.mm.opensdk.modelbase.BaseResp
+import com.tencent.mm.opensdk.modelbiz.ChooseCardFromWXCardPackage
 import com.tencent.mm.opensdk.modelbiz.SubscribeMessage
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.tencent.mm.opensdk.modelbiz.WXOpenBusinessWebview
@@ -48,6 +49,7 @@ object FluwxResponseHandler {
             is WXLaunchMiniProgram.Resp -> handleLaunchMiniProgramResponse(response)
             is SubscribeMessage.Resp -> handleSubscribeMessage(response)
             is WXOpenBusinessWebview.Resp -> handlerWXOpenBusinessWebviewResponse(response)
+            is ChooseCardFromWXCardPackage.Resp -> handleSelectInvoiceResp(response)
         }
     }
 
@@ -111,6 +113,21 @@ object FluwxResponseHandler {
         )
 
         channel?.invokeMethod(WeChatPluginMethods.WE_CHAT_SHARE_RESPONSE, result)
+
+    }
+
+    private fun handleSelectInvoiceResp(response: ChooseCardFromWXCardPackage.Resp) {
+        val result = mapOf(
+                errStr to response.errStr,
+                WechatPluginKeys.TRANSACTION to response.transaction,
+                type to response.type,
+                errCode to response.errCode,
+                openId to response.openId,
+                "cardItemList" to response.cardItemList,
+                WechatPluginKeys.PLATFORM to WechatPluginKeys.ANDROID
+        )
+
+        channel?.invokeMethod(WeChatPluginMethods.ON_SELECT_INVOICE_RESPONSE, result)
 
     }
 
