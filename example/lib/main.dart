@@ -46,6 +46,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    fluwx.responseFromSelectInvoice.listen((data) {
+      print(data.toString());
+    });
     return new MaterialApp(
       routes: <String, WidgetBuilder>{
         "shareText": (context) => ShareTextPage(),
@@ -153,7 +156,7 @@ class ShareSelectorPage extends StatelessWidget {
             child: new OutlineButton(
                 onPressed: () {
                   fluwx.selectInvoice(
-                      appId: "wxd930ea5d5a258f4f", cardSign: "cardSign")
+                      appId: "wx3f12d479b0082446")
                   .then((data) {
                     print(data);
                   });

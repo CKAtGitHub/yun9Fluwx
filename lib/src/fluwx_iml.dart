@@ -45,6 +45,9 @@ StreamController<WeChatPaymentResponse> _responsePaymentController =
 StreamController<WeChatSelectInvoiceResponse> _responseSelectInvoiceController =
     new StreamController.broadcast();
 
+Stream<WeChatSelectInvoiceResponse> get responseFromSelectInvoice =>
+    _responseSelectInvoiceController.stream;
+
 ///Response from payment
 Stream<WeChatPaymentResponse> get responseFromPayment =>
     _responsePaymentController.stream;
@@ -354,16 +357,16 @@ Future autoDeDuct(
 
 Future selectInvoice(
     {@required String appId,
-    @required String cardSign,
-    String signType = "SHA256",
+    String signType = "SHA1",
     String locationId,
     String cardId,
     String cardType = "INVOICE",
     String canMultiSelect = "1"}) async {
-  var nonceStr = DateTime.now().millisecondsSinceEpoch.toString();
-  var timeStamp = nonceStr.substring(0, nonceStr.length - 3);
+  var nonceStr = "1566197989";//DateTime.now().millisecondsSinceEpoch.toString();
+  var timeStamp = 1566197989;//nonceStr.substring(0, nonceStr.length - 3);
+  var cardSign = "c41588b530f3035e59ad268c231dfb13f8f7f563";
   return await _channel.invokeMethod("selectInvoice", {
-    'appid': appId,
+    'appId': appId,
     'locationId': locationId,
     'signType': signType,
     'cardSign': cardSign,

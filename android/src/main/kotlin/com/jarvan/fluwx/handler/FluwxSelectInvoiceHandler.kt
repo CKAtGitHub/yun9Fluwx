@@ -18,7 +18,6 @@ package com.jarvan.fluwx.handler
 import com.jarvan.fluwx.constant.CallResult
 import com.jarvan.fluwx.constant.WechatPluginKeys
 import com.tencent.mm.opensdk.modelbiz.ChooseCardFromWXCardPackage
-import com.tencent.mm.opensdk.modelpay.PayReq
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
@@ -41,6 +40,13 @@ class FluwxSelectInvoiceHandler {
             request.cardId = call.argument("cardId")
             request.cardType = call.argument("cardType")
             request.canMultiSelect = call.argument("canMultiSelect")
+            println(request.appId)
+            println(request.locationId)
+            println(request.cardSign)
+            println(request.nonceStr)
+            println(request.cardId)
+            println(request.cardType)
+            println(request.canMultiSelect)
             val done = WXAPiHandler.wxApi!!.sendReq(request)
             result.success(
                     mapOf(
