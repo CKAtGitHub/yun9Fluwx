@@ -9,6 +9,10 @@ build/
 *.iml
 .idea/
 .vscode/
+.gradle
+gradle
+
+local.properties
 
 android/.classpath
 android/.project

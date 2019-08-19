@@ -360,13 +360,15 @@ Future selectInvoice(
     String cardId,
     String cardType = "INVOICE",
     String canMultiSelect = "1"}) async {
+  var nonceStr = DateTime.now().millisecondsSinceEpoch.toString();
+  var timeStamp = nonceStr.substring(0, nonceStr.length - 3);
   return await _channel.invokeMethod("selectInvoice", {
     'appid': appId,
     'locationId': locationId,
     'signType': signType,
     'cardSign': cardSign,
-    'timeStamp': (DateTime.now().millisecondsSinceEpoch / 1000).toString(),
-    'nonceStr': DateTime.now().millisecondsSinceEpoch.toString(),
+    'timeStamp': timeStamp,
+    'nonceStr': nonceStr,
     'cardId': cardId,
     'cardType': cardType,
     'canMultiSelect': canMultiSelect
