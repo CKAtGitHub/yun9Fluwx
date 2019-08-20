@@ -156,7 +156,8 @@ class ShareSelectorPage extends StatelessWidget {
             child: new OutlineButton(
                 onPressed: () {
                   fluwx.selectInvoice(
-                      appId: "wx3f12d479b0082446")
+                      appId: "wx3f12d479b0082446",
+                  ticket: "bxLdikRXVbTPdHSM05e5u2NXh8TxoTYD0xLkv62pgHtE5z8W1AEGyf7VKyTtFFSu_ExDTfq1ROdotLeJh9v_ZA")
                   .then((data) {
                     print(data);
                   });

@@ -18,6 +18,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 import 'models/wechat_auth_by_qr_code.dart';
 import 'models/wechat_response.dart';
@@ -355,26 +357,20 @@ Future autoDeDuct(
   });
 }
 
-Future selectInvoice(
-    {@required String appId,
-    String signType = "SHA1",
-    String locationId,
-    String cardId,
-    String cardType = "INVOICE",
-    String canMultiSelect = "1"}) async {
-  var nonceStr = "1566197989";//DateTime.now().millisecondsSinceEpoch.toString();
-  var timeStamp = 1566197989;//nonceStr.substring(0, nonceStr.length - 3);
-  var cardSign = "c41588b530f3035e59ad268c231dfb13f8f7f563";
+Future selectInvoice({@required String appId, @required String ticket}) async {
+  var nonceStr = DateTime.now().millisecondsSinceEpoch.toString();
+  var timeStamp = nonceStr.substring(0, nonceStr.length - 3);
+  var cardSign = sha1.convert(utf8
+      .encode("jsapi_ticket=$ticket&noncestr=$nonceStr&timestamp=$timeStamp"))
+  .toString();
   return await _channel.invokeMethod("selectInvoice", {
     'appId': appId,
-    'locationId': locationId,
-    'signType': signType,
+    'signType': "SHA1",
     'cardSign': cardSign,
     'timeStamp': timeStamp,
     'nonceStr': nonceStr,
-    'cardId': cardId,
-    'cardType': cardType,
-    'canMultiSelect': canMultiSelect
+    'cardType': "INVOICE",
+    'canMultiSelect': "1"
   });
 }
 
