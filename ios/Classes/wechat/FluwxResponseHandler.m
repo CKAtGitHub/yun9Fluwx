@@ -97,9 +97,19 @@ FlutterMethodChannel *fluwxMethodChannel = nil;
     } else if ([resp isKindOfClass:[WXChooseCardResp class]]) {
         if (_delegate
                 && [_delegate respondsToSelector:@selector(managerDidRecvChooseCardResponse:)]) {
-            WXChooseCardResp *chooseCardResp = (WXChooseCardResp *) resp;
-            [_delegate managerDidRecvChooseCardResponse:chooseCardResp];
+            [_delegate managerDidRecvChooseCardResponse:(WXChooseCardResp *) resp];
         }
+
+         WXChooseCardResp *chooseCardResp = (WXChooseCardResp *) resp;
+             NSDictionary *cardResult = @{
+                @"errStr": chooseCardResp.errStr == nil ? @"" : chooseCardResp.errStr,
+                @"errCode": @(chooseCardResp.errCode),
+                @"type": chooseCardResp.type == nil ? @1 : @(chooseCardResp.type),
+                @"openid": chooseCardResp.openId,
+                @"cardItemList": chooseCardResp.cardItemList,
+                @"fluwxKeyPlatform": fluwxKeyIOS,
+        };
+        [fluwxMethodChannel invokeMethod:@"onSelectInvoiceResponse" arguments:cardResult];
     } else if ([resp isKindOfClass:[WXChooseInvoiceResp class]]) {
         if (_delegate
                 && [_delegate respondsToSelector:@selector(managerDidRecvChooseInvoiceResponse:)]) {
