@@ -99,23 +99,22 @@ FlutterMethodChannel *fluwxMethodChannel = nil;
                 && [_delegate respondsToSelector:@selector(managerDidRecvChooseCardResponse:)]) {
             [_delegate managerDidRecvChooseCardResponse:(WXChooseCardResp *) resp];
         }
-
-         WXChooseCardResp *chooseCardResp = (WXChooseCardResp *) resp;
-             NSDictionary *cardResult = @{
-                @"errStr": chooseCardResp.errStr == nil ? @"" : chooseCardResp.errStr,
-                @"errCode": @(chooseCardResp.errCode),
-                @"type": chooseCardResp.type == nil ? @1 : @(chooseCardResp.type),
-                @"openid": chooseCardResp.openId,
-                @"cardItemList": chooseCardResp.cardItemList,
-                @"fluwxKeyPlatform": fluwxKeyIOS,
-        };
-        [fluwxMethodChannel invokeMethod:@"onSelectInvoiceResponse" arguments:cardResult];
     } else if ([resp isKindOfClass:[WXChooseInvoiceResp class]]) {
         if (_delegate
                 && [_delegate respondsToSelector:@selector(managerDidRecvChooseInvoiceResponse:)]) {
-            WXChooseInvoiceResp *chooseInvoiceResp = (WXChooseInvoiceResp *) resp;
-            [_delegate managerDidRecvChooseInvoiceResponse:chooseInvoiceResp];
+            [_delegate managerDidRecvChooseInvoiceResponse:(WXChooseInvoiceResp *) resp];
         }
+
+        WXChooseInvoiceResp *chooseInvoiceResp = (WXChooseInvoiceResp *) resp;
+             NSDictionary *cardResult = @{
+                @"errStr": chooseInvoiceResp.errStr == nil ? @"" : chooseInvoiceResp.errStr,
+                @"errCode": @(chooseInvoiceResp.errCode),
+                @"type": chooseInvoiceResp.type == nil ? @1 : @(chooseInvoiceResp.type),
+                @"openid": chooseInvoiceResp.openId,
+                @"cardItemList": chooseInvoiceResp.cardItemList,
+                @"fluwxKeyPlatform": fluwxKeyIOS,
+        };
+        [fluwxMethodChannel invokeMethod:@"onSelectInvoiceResponse" arguments:cardResult];
     } else if ([resp isKindOfClass:[WXSubscribeMsgResp class]]) {
         if ([_delegate respondsToSelector:@selector(managerDidRecvSubscribeMsgResponse:)]) {
             [_delegate managerDidRecvSubscribeMsgResponse:(WXSubscribeMsgResp *) resp];
